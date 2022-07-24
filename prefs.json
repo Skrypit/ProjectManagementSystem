@@ -1,0 +1,6 @@
+{
+  "dbUrl": "jdbc:h2:./test",
+  "dbLogin": "sa",
+  "dbPassword": "",
+  "initDbSql": "src/main/resources/db/initDB.sql"
+}
