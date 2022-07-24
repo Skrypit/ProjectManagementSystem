@@ -102,7 +102,7 @@ public class DeveloperService {
 
 }
 //Todo переробити на PrepareStatements - ін'єкції
-//TODO видалити розробника
+//TODO видалити розробника✅
 //TODO список разработчиков отдельного проекта;✅
 //TODO список всех Java разработчиков;✅
 //TODO список всех middle разработчиков;✅

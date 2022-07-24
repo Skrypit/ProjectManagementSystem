@@ -18,26 +18,13 @@ public class App {
         DeveloperService developerService = new DeveloperService(storage);
 
         //developerService.createNewDeveloper("John", "Boorish", 55, "male");
-        developerService.printAllDevelopers();
         //developerService.selectDevelopersByLanguage("Java");
         //developerService.selectDevelopersByLevel("Middle");
         //developerService.selectDevelopersByProject("Chew deliciously");
         //developerService.removeTheDeveloper("Boorish");
+        developerService.printAllDevelopers();
 
-//TODO DROP TABLE test_table
-//TODO drop John Boorish✅
 
-//        String sql = String.format(
-//        "CREATE TABLE  IF NOT EXISTS test_table (name VARCHAR(100)," +
-//                "birthday VARCHAR(10))");
-//
-////        System.out.println("sql = " + sql);
-/////
-//            String insertSql = String.format("INSERT INTO test_table (name, birthday) VALUES ('%s', '%s')",
-//                    "Pikachu", LocalDate.now());
-////        System.out.println(insertSql);
-//        storage.executeUpdate(sql);
-//        storage.executeUpdate(insertSql);
 //      Витягти дані
 //        String selectSql = "SELECT name, birthday FROM test_table ";//зробив команду
 //        Statement statement = storage.getConnection().createStatement();//згодував Statement
