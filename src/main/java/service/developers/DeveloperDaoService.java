@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DeveloperDaoService {
@@ -25,16 +27,16 @@ public class DeveloperDaoService {
         deleteSt = connection.prepareStatement("DELETE FROM developers WHERE first_name LIKE ? AND last_name LIKE ?");
         selectByNameSt = connection.prepareStatement("SELECT* FROM developers WHERE first_name LIKE ? AND last_name LIKE ?");
 
-        selectByLanguageSt = connection.prepareStatement("SELECT first_name, last_name FROM developers " +
+        selectByLanguageSt = connection.prepareStatement("SELECT* FROM developers " +
                 "JOIN developer_skills ON developers.developer_id = developer_skills.developer_id " +
                 "JOIN skills ON skills.skill_id = developer_skills.skill_id " +
                 "WHERE skills.language LIKE ?");
-        selectByLevelSt = connection.prepareStatement("SELECT first_name, last_name " +
+        selectByLevelSt = connection.prepareStatement("SELECT* " +
                 "FROM developers " +
                 "JOIN developer_skills ON developers.developer_id = developer_skills.developer_id " +
                 "JOIN skills ON skills.skill_id = developer_skills.skill_id " +
                 " WHERE skills.level LIKE ?");
-        selectByProjectSt = connection.prepareStatement("SELECT first_name, last_name " +
+        selectByProjectSt = connection.prepareStatement("SELECT* " +
                 "FROM developers " +
                 "JOIN developers_projects ON developers.developer_id = developers_projects.developer_id " +
                 "JOIN projects ON projects.project_id = developers_projects.project_id " +
@@ -95,67 +97,80 @@ public class DeveloperDaoService {
         }
     }
 
-    public Developer selectDevelopersByLanguage(String language) throws SQLException {
+    public List<Developer> selectDevelopersByLanguage(String language) throws SQLException {
 
         selectByLanguageSt.setString(1, language);
+        List<Developer> result = new ArrayList<>();
+        ResultSet rs = selectByLanguageSt.executeQuery();
 
-        try (ResultSet rs = selectByLanguageSt.executeQuery()) {
-            if (!rs.next()) {
-                return null;
-            }
-            do {
-                Developer result = new Developer();
-                result.setId(rs.getLong("developer_id"));
-                result.setFirstName(rs.getString("first_name"));
-                result.setLastName(rs.getString("last_name"));
-                result.setAge(Integer.parseInt(rs.getString("age")));
-                result.setSex(Developer.Sex.valueOf(rs.getString("sex")));
+        while (rs.next()) {
+            Developer developer = new Developer();
+            developer.setId(rs.getLong("developer_id"));
+            developer.setFirstName(rs.getString("first_name"));
+            developer.setLastName(rs.getString("last_name"));
+            developer.setAge(Integer.parseInt(rs.getString("age")));
+            developer.setSex(Developer.Sex.valueOf(rs.getString("sex")));
 
-                return result;
-            } while (rs.next());
+            result.add(developer);
         }
+        return result;
     }
 
-    public Developer selectDevelopersByLevel(String level) throws SQLException {
+    public List<Developer> selectDevelopersByLevel(String level) throws SQLException {
 
         selectByLevelSt.setString(1, level);
 
-        try (ResultSet rs = selectByLevelSt.executeQuery()) {
-            if (!rs.next()) {
-                return null;
-            }
-            do {
-                Developer result = new Developer();
-                result.setId(rs.getLong("developer_id"));
-                result.setFirstName(rs.getString("first_name"));
-                result.setLastName(rs.getString("last_name"));
-                result.setAge(Integer.parseInt(rs.getString("age")));
-                result.setSex(Developer.Sex.valueOf(rs.getString("sex")));
+        List<Developer> result = new ArrayList<>();
 
-                return result;
-            } while (rs.next());
+        ResultSet rs = selectByLevelSt.executeQuery();
+
+        while (rs.next()) {
+            Developer developer = new Developer();
+            developer.setId(rs.getLong("developer_id"));
+            developer.setFirstName(rs.getString("first_name"));
+            developer.setLastName(rs.getString("last_name"));
+            developer.setAge(Integer.parseInt(rs.getString("age")));
+            developer.setSex(Developer.Sex.valueOf(rs.getString("sex")));
+            result.add(developer);
         }
+        return result;
     }
 
-    public Developer selectDeveloperByProject(String projectName) throws SQLException {
+    public List<Developer> selectDeveloperByProject(String projectName) throws SQLException {
 
         selectByProjectSt.setString(1, projectName);
 
-        try (ResultSet rs = selectByProjectSt.executeQuery()) {
-            if (!rs.next()) {
-                return null;
-            }
-            do {
-                Developer result = new Developer();
-                result.setId(rs.getLong("developer_id"));
-                result.setFirstName(rs.getString("first_name"));
-                result.setLastName(rs.getString("last_name"));
-                result.setAge(Integer.parseInt(rs.getString("age")));
-                result.setSex(Developer.Sex.valueOf(rs.getString("sex")));
+        List<Developer> result = new ArrayList<>();
 
-                return result;
-            } while (rs.next());
+        ResultSet rs = selectByProjectSt.executeQuery();
+        while (rs.next()) {
+            Developer developer = new Developer();
+            developer.setId(rs.getLong("developer_id"));
+            developer.setFirstName(rs.getString("first_name"));
+            developer.setLastName(rs.getString("last_name"));
+            developer.setAge(Integer.parseInt(rs.getString("age")));
+            developer.setSex(Developer.Sex.valueOf(rs.getString("sex")));
+            result.add(developer);
         }
+        return result;
     }
 }
 
+
+/*SELECT*
+                FROM developers
+                JOIN developers_projects ON developers.developer_id = developers_projects.developer_id
+                JOIN projects ON projects.project_id = developers_projects.project_id
+                WHERE projects.project_name ='Roses to all'
+
+SELECT* FROM developers
+                JOIN developer_skills ON developers.developer_id = developer_skills.developer_id
+                JOIN skills ON skills.skill_id = developer_skills.skill_id
+                WHERE skills.language = 'Java'
+
+SELECT*
+                FROM developers
+                JOIN developer_skills ON developers.developer_id = developer_skills.developer_id
+                JOIN skills ON skills.skill_id = developer_skills.skill_id
+                 WHERE skills.level = 'Middle'
+                */

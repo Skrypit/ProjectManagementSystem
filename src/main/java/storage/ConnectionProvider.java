@@ -14,7 +14,10 @@ public class ConnectionProvider {
     }
 
     public Connection createConnection() throws SQLException {
-        Connection result = DriverManager.getConnection(StorageConst.CONNECTION_URL);
+        Connection result = DriverManager.getConnection(
+                StorageConst.CONNECTION_URL,
+                StorageConst.DB_LOGIN,
+                StorageConst.DB_PASSWORD);
 
         connections.add(result);
 

@@ -5,6 +5,7 @@ import service.developers.DeveloperDaoService;
 import storage.ConnectionProvider;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class DeveloperState extends CliState {
@@ -206,7 +207,7 @@ public class DeveloperState extends CliState {
         String project = scanner.nextLine();
 
         try {
-            Developer byProject = new DeveloperDaoService(connectionProvider
+            List<Developer> byProject = new DeveloperDaoService(connectionProvider
                     .createConnection())
                     .selectDeveloperByProject(project);
             System.out.println(byProject);
@@ -221,7 +222,7 @@ public class DeveloperState extends CliState {
         String language = scanner.nextLine();
 
         try {
-            Developer byLanguage = new DeveloperDaoService(connectionProvider
+            List<Developer> byLanguage = new DeveloperDaoService(connectionProvider
                     .createConnection())
                     .selectDevelopersByLanguage(language);
             System.out.println(byLanguage);
@@ -235,7 +236,7 @@ public class DeveloperState extends CliState {
         System.out.println("Please, enter level (Junior, Middle, Senior)");
         String level = scanner.nextLine();
         try {
-            Developer byLevel = new DeveloperDaoService(connectionProvider
+            List<Developer> byLevel = new DeveloperDaoService(connectionProvider
                     .createConnection())
                     .selectDevelopersByLevel(level);
             System.out.println(byLevel);
@@ -247,74 +248,3 @@ public class DeveloperState extends CliState {
 }
 
 
-/*
-
-
-
-
-
-    private void getAll() throws SQLException {
-        try {
-            List<Developer> all = new DeveloperDaoService(connectionProvider.createConnection()).getAllDevelopers();
-            all.forEach(System.out::println);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        developerInputLoop();
-    }
-
-
-
-    private void deleteById() throws SQLException {
-        int id = setId(new Developer(), 5).getDevelopersId();
-        try {
-            new DeveloperDaoService(connectionProvider.createConnection()).deleteById(id);
-            System.out.println(true);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        developerInputLoop();
-    }
-
-    private void getByProjectId() throws SQLException {
-        while (true) {
-            try{
-                List<Project> projects = new ProjectDaoService(connectionProvider.createConnection()).getAllProjects();
-                projects.forEach(System.out::println);
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }
-            System.out.println("Enter project_id:");
-            try {
-                int projectId = Integer.parseInt(scanner.nextLine());
-                List<Developer> developersByProjectId = new DeveloperDaoService(connectionProvider.createConnection()).
-                        getDevelopersByProject(projectId);
-                developersByProjectId.forEach(System.out::println);
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-        developerInputLoop();
-    }
-
-    private void getAllJavaDev() throws SQLException {
-        while (true){
-            try {
-                List<Developer> developersJava = new DeveloperDaoService(connectionProvider.createConnection()).
-                        getAllJavaDevelopers();
-                developersJava.forEach(System.out::println);
-                break;
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        developerInputLoop();
-    }
-
-
-
-    */
