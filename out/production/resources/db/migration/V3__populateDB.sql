@@ -1,6 +1,4 @@
---Adding data to tables
-
-INSERT INTO developers (first_name, last_name, age,sex) VALUES 
+INSERT INTO developers (first_name, last_name, age ,sex) VALUES
 ('Ivan', 'Pysar', 20, 'male'),
 ('Anna', 'Yurina', 35, 'female'),
 ('Ihor', 'Viter', 28, 'male'),
@@ -26,8 +24,6 @@ INSERT INTO customers(first_name, last_name,email) VALUES
 ('Elvis', 'Presley', 'rock&rollking@email.com'),
 ('Ariana', 'Grande', 'ariana1993@email.com'),
 ('John', 'Elton', 'sorryseemstobe@email.com');
-
---Adding data to tables for relationship 
 
 INSERT INTO developers_projects (developer_id, project_id) VALUES
 (1,1),

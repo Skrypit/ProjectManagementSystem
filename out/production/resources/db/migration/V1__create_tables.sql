@@ -33,32 +33,32 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 
 CREATE TABLE IF NOT EXISTS developers_projects(
-developer_id  BIGINT NOT NULL,
-project_id  BIGINT NOT NULL,
+developer_id  INT NOT NULL,
+project_id  INT NOT NULL,
 PRIMARY KEY (developer_id, project_id),
 FOREIGN KEY(project_id) REFERENCES projects(project_id),
 FOREIGN KEY (developer_id) REFERENCES developers(developer_id)
 );
 
 CREATE TABLE IF NOT EXISTS developer_skills(
-developer_id  BIGINT NOT NULL,
-skill_id  BIGINT NOT NULL,
+developer_id  INT NOT NULL,
+skill_id  INT NOT NULL,
 PRIMARY KEY (developer_id, skill_id),
 FOREIGN KEY(skill_id) REFERENCES skills(skill_id),
 FOREIGN KEY (developer_id) REFERENCES developers(developer_id)
 );
 
 CREATE TABLE IF NOT EXISTS companies_projects(
-company_id BIGINT NOT NULL,
-project_id  BIGINT NOT NULL,
+company_id INT NOT NULL,
+project_id  INT NOT NULL,
 PRIMARY KEY (company_id, project_id),
 FOREIGN KEY(project_id) REFERENCES projects(project_id),
 FOREIGN KEY (company_id) REFERENCES companies(company_id)
 );
 
 CREATE TABLE IF NOT EXISTS customers_projects(
-customer_id  BIGINT NOT NULL,
-project_id  BIGINT NOT NULL,
+customer_id  INT NOT NULL,
+project_id  INT NOT NULL,
 PRIMARY KEY (customer_id, project_id),
 FOREIGN KEY(project_id) REFERENCES projects(project_id),
 FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
