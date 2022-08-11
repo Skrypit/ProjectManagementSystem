@@ -18,18 +18,4 @@ public class App {
 
     }
 }
-/*
-*    Developer
-* create +
-* show +
-* delete +
-* 5 +
-* 6 +
-* 7 +
-*   Project
-*
-*   Company
-*
-*   Customer
-*
-* */
+

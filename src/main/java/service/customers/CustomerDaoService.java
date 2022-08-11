@@ -33,14 +33,14 @@ public class CustomerDaoService {
     }
 
     public void update(Customer customer) throws SQLException {
-        updateSt.setLong(1, customer.getId());
-        updateSt.setString(2, customer.getFirstName());
-        updateSt.setString(3, customer.getLastName());
-        updateSt.setString(4, customer.getEmail());
+
+        updateSt.setString(1, customer.getFirstName());
+        updateSt.setString(2, customer.getLastName());
+        updateSt.setString(3, customer.getEmail());
+        updateSt.setLong(4, customer.getId());
 
         updateSt.executeUpdate();
     }
-
 
     public boolean removeTheCustomer(Customer customer) {
         try {

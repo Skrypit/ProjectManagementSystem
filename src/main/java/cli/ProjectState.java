@@ -1,7 +1,5 @@
 package cli;
 
-import service.developers.Developer;
-import service.developers.DeveloperDaoService;
 import service.projects.Project;
 import service.projects.ProjectDaoService;
 import storage.ConnectionProvider;
@@ -96,7 +94,7 @@ public class ProjectState extends CliState {
         try {
             new ProjectDaoService(connectionProvider.createConnection())
                     .create(project);
-            System.out.println(true);
+            System.out.println("Project created!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -141,6 +139,18 @@ public class ProjectState extends CliState {
             }
         }
     }
+    private void setId(Project project, String command) {
+        while (true) {
+            System.out.println("Please, enter the id to which implement update");
+            String id = scanner.nextLine();
+            try {
+                project.setId(Long.parseLong(id));
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     private void getProject() throws SQLException {
         Project project = new Project();
@@ -150,7 +160,7 @@ public class ProjectState extends CliState {
             Project byName = new ProjectDaoService(connectionProvider
                     .createConnection())
                     .selectProjectByName(project);
-            System.out.println(byName);
+            System.out.println(byName + "\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -162,12 +172,12 @@ public class ProjectState extends CliState {
         setProjectName(project, "3");
         setType(project, "3");
         setDescription(project, "3");
-
+        setId(project,"3");
         try {
             new ProjectDaoService(connectionProvider
                     .createConnection())
                     .update(project);
-            System.out.println(true);
+            System.out.println("Project updated!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -182,7 +192,7 @@ public class ProjectState extends CliState {
             new ProjectDaoService(connectionProvider
                     .createConnection())
                     .removeTheProject(project);
-            System.out.println(true);
+            System.out.println("Project deleted!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -195,7 +205,7 @@ public class ProjectState extends CliState {
             new ProjectDaoService(connectionProvider
                     .createConnection())
                     .showListOfProjects();
-            System.out.println(true);
+            System.out.println("\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -209,7 +219,7 @@ public class ProjectState extends CliState {
             new ProjectDaoService(connectionProvider
                     .createConnection())
                     .showSumOfAllSalaries(level);
-            System.out.println(true);
+            System.out.println("\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

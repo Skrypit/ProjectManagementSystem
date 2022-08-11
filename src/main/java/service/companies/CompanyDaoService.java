@@ -28,9 +28,10 @@ public class CompanyDaoService {
         createSt.executeUpdate();
     }
     public void update(Company company) throws SQLException {
-        updateSt.setLong(1, company.getCompanyId());
-        updateSt.setString(2, company.getCompanyName());
-        updateSt.setString(3, company.getResidence());
+
+        updateSt.setString(1, company.getCompanyName());
+        updateSt.setString(2, company.getResidence());
+        updateSt.setLong(3, company.getId());
 
         updateSt.executeUpdate();
     }
@@ -58,7 +59,7 @@ public class CompanyDaoService {
             }
             do {
                 Company result = new Company();
-                result.setCompanyId(rs.getLong("company_id"));
+                result.setId(rs.getLong("company_id"));
                 result.setCompanyName(rs.getString("company_name"));
                 result.setResidence(rs.getString("residence"));
 

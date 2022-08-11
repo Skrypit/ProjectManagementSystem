@@ -2,8 +2,6 @@ package cli;
 
 import service.customers.Customer;
 import service.customers.CustomerDaoService;
-import service.developers.Developer;
-import service.developers.DeveloperDaoService;
 import storage.ConnectionProvider;
 
 import java.sql.SQLException;
@@ -89,7 +87,7 @@ public class CustomerState extends CliState {
         try {
             new CustomerDaoService(connectionProvider.createConnection())
                     .create(customer);
-            System.out.println(true);
+            System.out.println("Customer created!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -128,7 +126,20 @@ public class CustomerState extends CliState {
             System.out.println("Please, enter email");
             String email = scanner.nextLine();
             try {
-                customer.setLastName(email);
+                customer.setEmail(email);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void setId(Customer customer, String command) {
+        while (true) {
+            System.out.println("Please, enter the id to which implement update");
+            String id = scanner.nextLine();
+            try {
+                customer.setId(Long.parseLong(id));
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -145,7 +156,7 @@ public class CustomerState extends CliState {
             Customer byName = new CustomerDaoService(connectionProvider
                     .createConnection())
                     .selectCustomerByName(customer);
-            System.out.println(byName);
+            System.out.println(byName + "\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -157,11 +168,12 @@ public class CustomerState extends CliState {
         setFirstName(customer, "3");
         setLastName(customer, "3");
         setEmail(customer, "3");
+        setId(customer,"3");
 
         try {
             new CustomerDaoService(connectionProvider.createConnection())
                     .update(customer);
-            System.out.println(true);
+            System.out.println("Customer updated!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -176,7 +188,7 @@ public class CustomerState extends CliState {
         try {
             new CustomerDaoService(connectionProvider.createConnection())
                     .removeTheCustomer(customer);
-            System.out.println(true);
+            System.out.println("Customer deleted!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

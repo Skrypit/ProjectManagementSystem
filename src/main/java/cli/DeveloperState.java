@@ -96,7 +96,7 @@ public class DeveloperState extends CliState {
         setSex(developer, "1");
         try {
             new DeveloperDaoService(connectionProvider.createConnection()).create(developer);
-            System.out.println(true);
+            System.out.println("Developer created!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -145,10 +145,23 @@ public class DeveloperState extends CliState {
 
     private void setSex(Developer developer, String command) {
         while (true) {
-            System.out.println("Please, enter sex (male, female or unknown)");
+            System.out.println("Please, enter sex (male, female or other)");
             String sex = scanner.nextLine();
             try {
                 developer.setSex(Developer.Sex.valueOf(sex));
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void setId(Developer developer, String command) {
+        while (true) {
+            System.out.println("Please, enter the id to which implement update");
+            String id = scanner.nextLine();
+            try {
+                developer.setId(Long.parseLong(id));
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -177,10 +190,11 @@ public class DeveloperState extends CliState {
         setLastName(developer, "3");
         setAge(developer, "3");
         setSex(developer, "3");
+        setId(developer,"3");
 
         try {
             new DeveloperDaoService(connectionProvider.createConnection()).update(developer);
-            System.out.println(true);
+            System.out.println("Developer updated!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -195,7 +209,7 @@ public class DeveloperState extends CliState {
         try {
             new DeveloperDaoService(connectionProvider.createConnection())
                     .removeTheDeveloper(developer);
-            System.out.println(true);
+            System.out.println("Developer deleted!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

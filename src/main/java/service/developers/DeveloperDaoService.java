@@ -53,15 +53,15 @@ public class DeveloperDaoService {
     }
 
     public void update(Developer developer) throws SQLException {
-        updateSt.setLong(1, developer.getId());
-        updateSt.setString(2, developer.getFirstName());
-        updateSt.setString(3, developer.getLastName());
-        updateSt.setInt(4, developer.getAge());
-        updateSt.setString(5, developer.getSex().name());
+
+        updateSt.setString(1, developer.getFirstName());
+        updateSt.setString(2, developer.getLastName());
+        updateSt.setInt(3, developer.getAge());
+        updateSt.setString(4, developer.getSex().name());
+        updateSt.setLong(5, developer.getId());
 
         updateSt.executeUpdate();
     }
-
 
     public boolean removeTheDeveloper(Developer developer) {
         try {

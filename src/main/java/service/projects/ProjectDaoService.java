@@ -24,7 +24,7 @@ public class ProjectDaoService {
         selectByNameSt = connection.prepareStatement(
                 "SELECT* FROM projects WHERE project_name LIKE ? ");
         showListOfProjectsSt = connection.prepareStatement(
-                "SELECT creation_date, project_name, SUM(service.developers.developer_id) AS total_developers " +
+                "SELECT creation_date, project_name, SUM(developers.developer_id) AS total_developers " +
                 "FROM projects " +
                 "JOIN developers_projects ON developers_projects.project_id = projects.project_id " +
                 "JOIN developers ON developers.developer_id = developers_projects.developer_id " +
@@ -45,14 +45,14 @@ public class ProjectDaoService {
         createSt.executeUpdate();
     }
     public void update(Project project) throws SQLException {
-        updateSt.setLong(1, project.getId());
-        updateSt.setString(2, project.getProjectName());
-        updateSt.setString(3, project.getType());
-        updateSt.setString(4, project.getDescription());
+
+        updateSt.setString(1, project.getProjectName());
+        updateSt.setString(2, project.getType());
+        updateSt.setString(3, project.getDescription());
+        updateSt.setLong(4, project.getId());
 
         updateSt.executeUpdate();
     }
-
 
     public boolean removeTheProject(Project project) {
         try {
@@ -101,7 +101,7 @@ public class ProjectDaoService {
             }
 
             String totalCost = rs.getString("project_cost");
-            System.out.println("The total sum of the salaries of service.developers on the project is " + totalCost);
+            System.out.println("The total sum of salaries on this project = " + totalCost);
             return true;
 
         } catch (Exception ex) {

@@ -83,7 +83,7 @@ public class CompanyState  extends CliState{
         try {
             new CompanyDaoService(connectionProvider.createConnection())
                     .create(company);
-            System.out.println(true);
+            System.out.println("The company created!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -116,6 +116,18 @@ public class CompanyState  extends CliState{
         }
     }
 
+    private void setId(Company company, String command) {
+        while (true) {
+            System.out.println("Please, enter the id to which implement update");
+            String id = scanner.nextLine();
+            try {
+                company.setId(Long.parseLong(id));
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
     private void getCompany() throws SQLException {
         Company company = new Company();
         setCompanyName(company, "2");
@@ -124,7 +136,7 @@ public class CompanyState  extends CliState{
             Company byName = new CompanyDaoService(connectionProvider
                     .createConnection())
                     .selectCompanyByName(company);
-            System.out.println(byName);
+            System.out.println(byName + "\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -135,12 +147,12 @@ public class CompanyState  extends CliState{
         Company company = new Company();
         setCompanyName(company, "3");
         setResidence(company,"3");
-
+        setId(company,"3");
         try {
             new CompanyDaoService(connectionProvider
                     .createConnection())
                     .update(company);
-            System.out.println(true);
+            System.out.println("Company updated!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -155,7 +167,7 @@ public class CompanyState  extends CliState{
             new CompanyDaoService(connectionProvider
                     .createConnection())
                     .removeByCompanyName(company);
-            System.out.println(true);
+            System.out.println("Company deleted!\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
