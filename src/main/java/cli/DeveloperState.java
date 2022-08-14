@@ -178,6 +178,7 @@ public class DeveloperState extends CliState {
         try {
             Developer byName = new DeveloperDaoService(connectionProvider.createConnection()).selectDevelopersByName(developer);
             System.out.println(byName);
+            System.out.println("\nChose next command");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -186,11 +187,12 @@ public class DeveloperState extends CliState {
 
     private void updateDeveloper() throws SQLException {
         Developer developer = new Developer();
+        setId(developer,"3");
         setFirstName(developer, "3");
         setLastName(developer, "3");
         setAge(developer, "3");
         setSex(developer, "3");
-        setId(developer,"3");
+
 
         try {
             new DeveloperDaoService(connectionProvider.createConnection()).update(developer);

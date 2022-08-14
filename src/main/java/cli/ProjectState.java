@@ -169,10 +169,11 @@ public class ProjectState extends CliState {
 
     private void updateProject() throws SQLException {
         Project project = new Project();
+        setId(project,"3");
         setProjectName(project, "3");
         setType(project, "3");
         setDescription(project, "3");
-        setId(project,"3");
+
         try {
             new ProjectDaoService(connectionProvider
                     .createConnection())

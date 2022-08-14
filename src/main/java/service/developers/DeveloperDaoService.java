@@ -25,6 +25,7 @@ public class DeveloperDaoService {
                 "UPDATE developers SET first_name = ?, last_name = ?, age = ?, sex = ? WHERE developer_id = ?");
 
         deleteSt = connection.prepareStatement("DELETE FROM developers WHERE first_name LIKE ? AND last_name LIKE ?");
+
         selectByNameSt = connection.prepareStatement("SELECT* FROM developers WHERE first_name LIKE ? AND last_name LIKE ?");
 
         selectByLanguageSt = connection.prepareStatement("SELECT* FROM developers " +

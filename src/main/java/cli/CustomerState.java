@@ -165,10 +165,11 @@ public class CustomerState extends CliState {
 
     private void updateCustomer() throws SQLException {
         Customer customer = new Customer();
+        setId(customer,"3");
         setFirstName(customer, "3");
         setLastName(customer, "3");
         setEmail(customer, "3");
-        setId(customer,"3");
+
 
         try {
             new CustomerDaoService(connectionProvider.createConnection())

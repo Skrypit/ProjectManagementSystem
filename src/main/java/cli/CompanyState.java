@@ -145,9 +145,10 @@ public class CompanyState  extends CliState{
 
     private void updateCompany() throws SQLException {
         Company company = new Company();
+        setId(company,"3");
         setCompanyName(company, "3");
         setResidence(company,"3");
-        setId(company,"3");
+
         try {
             new CompanyDaoService(connectionProvider
                     .createConnection())
